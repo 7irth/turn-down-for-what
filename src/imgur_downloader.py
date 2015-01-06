@@ -40,6 +40,8 @@ def download_imgs(album_url, folders=False):
         os.makedirs('out/pngs', exist_ok=True)
         os.makedirs('out/webms', exist_ok=True)
         os.makedirs('out/others', exist_ok=True)
+    else:
+        os.makedirs('downloaded', exist_ok=True)
 
     for img in imgs:
         response = requests.get(img, stream=True)
@@ -50,7 +52,7 @@ def download_imgs(album_url, folders=False):
         if folders:
             path = 'out/' + extension + 's' + filename
         else:
-            path = filename
+            path = 'downloaded/' + filename
 
         with open(path, 'wb') as out_file:
             shutil.copyfileobj(response.raw, out_file)
@@ -58,7 +60,7 @@ def download_imgs(album_url, folders=False):
 
 
 if __name__ == '__main__':
-    with open('.links.txt') as links:
+    with open('links.txt') as links:
         albums = links.read().splitlines()
 
     for album in albums:
