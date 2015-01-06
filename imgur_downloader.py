@@ -1,5 +1,7 @@
 __author__ = 'Tirth Patel <complaints@tirthpatel.com>'
 
+# should prolly write stuff here eventually
+
 import requests
 import re
 import shutil
