@@ -1,4 +1,4 @@
-__author__ = '7irth complaints@tirthpate.com'
+__author__ = 'Tirth Patel <complaints@tirthpatel.com>'
 
 import requests
 import re
