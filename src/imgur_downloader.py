@@ -1,6 +1,6 @@
 __author__ = 'Tirth Patel <complaints@tirthpatel.com>'
 
-# should prolly write stuff here eventually
+# only for five letter images at the moment
 
 import requests
 import re
@@ -14,22 +14,21 @@ def get_img_links(url):
     if req.status_code != 200:
         return []
 
-    return clean_up(re.findall(r'(img|source) src="(.*?)"', req.text))
+    return clean_up(re.findall(r'data-src="//(.*?)"', req.text))
 
 
-def clean_up(il):
-    # Well this is going to be dirty, to compensate for the shitty regex
-    #                             ...as if the whole program wasn't already
-    shiny = []
+def clean_up(coarse_urls):
+    clean_urls = []
 
-    for i in il:
-        if i[1][-1] != '4':  # mp4 exclusion
-            if i[1][-4:] == 'webm':  # webm to gif conversion
-                shiny += ['http:' + i[1][:-4] + 'gif']
-            else:
-                shiny += ['http:' + i[1]]
+    for url in coarse_urls:
+        # if url[1][-1] != '4':  # mp4 exclusion
+        #     if url[1][-4:] == 'webm':  # webm to gif conversion
+        #         clean_urls += ['http:' + url[1][:-4] + 'gif']
+        #     else:
 
-    return shiny[:-1]  # because reasons
+        clean_urls += ['http://' + url[:17] + url[18:]]
+
+    return clean_urls  # because reasons
 
 
 def download_imgs(album_url, folders=False):
@@ -60,8 +59,10 @@ def download_imgs(album_url, folders=False):
 
 
 if __name__ == '__main__':
-    with open('links.txt') as links:
-        albums = links.read().splitlines()
+    # with open('links.txt') as links:
+    #     albums = links.read().splitlines()
+
+    albums = ['http://imgur.com/a/Dc2k6']
 
     for album in albums:
         if album[0] != "#":
