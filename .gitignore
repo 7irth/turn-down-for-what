@@ -55,4 +55,8 @@ docs/_build/
 # PyBuilder
 target/
 
+# IntelliJ
+.idea/
+downloaded/
+out/
 
