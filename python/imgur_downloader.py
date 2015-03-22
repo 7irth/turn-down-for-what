@@ -59,10 +59,8 @@ def download_imgs(album_url, folders=False):
 
 
 if __name__ == '__main__':
-    # with open('links.txt') as links:
-    #     albums = links.read().splitlines()
-
-    albums = ['http://imgur.com/a/Dc2k6']
+    with open('imgur_links.txt', 'r') as links:
+        albums = links.read().splitlines()
 
     for album in albums:
         if album[0] != "#":

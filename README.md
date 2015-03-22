@@ -1,4 +1,5 @@
 turn-down-for-what
 ==================
 
-TODO: Write a readme
+Just some short programs I've written for various purposes, chief amongst them
+being my own amusement and curiosity.
